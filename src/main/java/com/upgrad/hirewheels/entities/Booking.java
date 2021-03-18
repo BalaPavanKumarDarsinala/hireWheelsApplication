@@ -1,19 +1,38 @@
 package com.upgrad.hirewheels.entities;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 @Entity
 public class Booking {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int booking_id;
     private LocalDateTime pickup_date;
     private LocalDateTime dropoff_date;
     private LocalDateTime booking_date;
     private float amount;
-    private int location_id;
-    private int vehicle_id;
-    private  int user_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    private Location location_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    private Vehicle vehicle_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    private  Users user_id;
 
+    public Booking(int booking_id, LocalDateTime pickup_date, LocalDateTime dropoff_date, LocalDateTime booking_date, float amount, Location location_id, Vehicle vehicle_id, Users user_id) {
+        this.booking_id = booking_id;
+        this.pickup_date = pickup_date;
+        this.dropoff_date = dropoff_date;
+        this.booking_date = booking_date;
+        this.amount = amount;
+        this.location_id = location_id;
+        this.vehicle_id = vehicle_id;
+        this.user_id = user_id;
+    }
+
+    public Booking() {
+    }
 
     public int getBooking_id() {
         return booking_id;
@@ -55,27 +74,27 @@ public class Booking {
         this.amount = amount;
     }
 
-    public int getLocation_id() {
+    public Location getLocation_id() {
         return location_id;
     }
 
-    public void setLocation_id(int location_id) {
+    public void setLocation_id(Location location_id) {
         this.location_id = location_id;
     }
 
-    public int getVehicle_id() {
+    public Vehicle getVehicle_id() {
         return vehicle_id;
     }
 
-    public void setVehicle_id(int vehicle_id) {
+    public void setVehicle_id(Vehicle vehicle_id) {
         this.vehicle_id = vehicle_id;
     }
 
-    public int getUser_id() {
+    public Users getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(Users user_id) {
         this.user_id = user_id;
     }
 

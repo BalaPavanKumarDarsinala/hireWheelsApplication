@@ -5,31 +5,42 @@ import javax.persistence.*;
 @Entity
 public class VehicleCategory {
     @Id
-    private int vehicle_category_id;
-    private String vehicle_category_name;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int vehicleCategoryId;
+    private String vehicleCategoryName;
 
-
-    public int getVehicle_category_id() {
-        return vehicle_category_id;
+    public VehicleCategory(int vehicleCategoryId, String vehicleCategoryName) {
+        this.vehicleCategoryId = vehicleCategoryId;
+        this.vehicleCategoryName = vehicleCategoryName;
     }
 
-    public void setVehicle_category_id(int vehicle_category_id) {
-        this.vehicle_category_id = vehicle_category_id;
+    public VehicleCategory() {
     }
 
-    public String getVehicle_category_name() {
-        return vehicle_category_name;
+    public int getVehicleCategoryId() {
+        return vehicleCategoryId;
     }
 
-    public void setVehicle_category_name(String vehicle_category_name) {
-        this.vehicle_category_name = vehicle_category_name;
+    public void setVehicleCategoryId(int vehicleCategoryId) {
+        this.vehicleCategoryId = vehicleCategoryId;
+    }
+
+    public String getVehicleCategoryName() {
+        return vehicleCategoryName;
+    }
+
+    public void setVehiclCategoryName(String vehicleCategoryName) {
+        this.vehicleCategoryName = vehicleCategoryName;
     }
 
     @Override
     public String toString() {
-        return "Vehicle_category{" +
-                "vehicle_category_id=" + vehicle_category_id +
-                ", vehicle_category_name='" + vehicle_category_name + '\'' +
+        return "VehicleCategory{" +
+                "vehicleCategoryId=" + vehicleCategoryId +
+                ", vehicleCategoryName='" + vehicleCategoryName + '\'' +
                 '}';
     }
 }
+
+
+

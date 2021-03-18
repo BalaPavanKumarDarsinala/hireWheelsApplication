@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class UsersDaoImpl implements UsersDao {
+public abstract class UsersDaoImpl implements UsersDao {
     private SessionFactory sessionFactory;
 
 
@@ -29,7 +29,7 @@ public class UsersDaoImpl implements UsersDao {
         Transaction transaction = session.beginTransaction();
 
         session.save(users);
-
+session.remove(users);
         transaction.commit();
         session.close();
 
@@ -49,7 +49,7 @@ public class UsersDaoImpl implements UsersDao {
         return users;
     }
 
-@Override
+
     public List <Users> findByFirstName(String firstName) {
         return null;
     }

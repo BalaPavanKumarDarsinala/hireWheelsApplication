@@ -1,65 +1,87 @@
 package com.upgrad.hirewheels.entities;
 
 
+import com.upgrad.hirewheels.dao.RolesDao;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.util.Set;
 import javax.persistence.*;
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+
 @Entity
 public class Users {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column()
-    private int user_id ;
-    @Column()
-    private  String  first_name;
-    @Column()
-    private String last_name;
-    @Column()
-    private String  password;
-    @Column()
+    @Column
+    private int userId;
+    @Column(length = 20,nullable = false)
+    private String firstName;
+    @Column(length = 20,nullable = false)
+    private String lastName;
+    @Column(length = 20,nullable = false)
+    private String password;
+    @Column(length = 20,nullable = false)
     private String email;
-    @Column()
-    private String mobile_no;
-    @Column()
-    private double wallet_money;
-   @ManyToOne
-    private Roles role_id;
+    @Column(length = 20,nullable = false)
+    private String mobileNo;
+    @Column(nullable = false)
+    private int wallet_money;
+  //  @ManyToOne(cascade = CascadeType.REMOVE)
+  //  @JoinColumn(name = "role_id", nullable = true)
+   // private Roles roleId;
 
-    public Users(int user_id, String first_name, String last_name, String password, String email, String mobile_no, double wallet_money, Roles role_id) {
-        this.user_id = user_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Users( String firstName, String lastName, String password, String email, String mobileNo, int wallet_money) {
+        //this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
         this.email = email;
-        this.mobile_no = mobile_no;
+        this.mobileNo = mobileNo;
         this.wallet_money = wallet_money;
-        this.role_id = role_id;
+        //this.roleId = roleId;
+    }
+
+    public Users(String email) {
+        this.email = email;
+    }
+
+    //public Users(String upgrad, String admin, String lastName, String password, String email, int i, Roles roles) {
+    //}
+
+    public Users(int i, String save_test) {
+
     }
 
     public Users() {
 
     }
 
-    public static String getFirst_name() {
-        return null;
+    @OneToMany (mappedBy = "users", fetch = FetchType.EAGER)
+    private Set<Users> users;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-       this.user_id = user_id;
-   }
-
-    public  String getFirst_name(String first_name) {
-        return first_name ;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public  void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -78,45 +100,44 @@ public class Users {
         this.email = email;
     }
 
-    public String getMobile_no() {
-        return mobile_no;
+    public String getMobileNo() {
+        return mobileNo;
     }
 
-    public void setMobile_no(String mobile_no) {
-        this.mobile_no = mobile_no;
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
     }
 
-    public double getWallet_money() {
+    public int getWallet_money() {
         return wallet_money;
     }
 
-    public void setWallet_money(double wallet_money) {
+    public void setWallet_money(int wallet_money) {
         this.wallet_money = wallet_money;
     }
 
-    public Roles getRole_id() {
-        return role_id;
-    }
+   // public Roles getRoleId() {
+     //   return roleId;
+    //}
 
-    public void setRole_id(Roles role_id) {
-        this.role_id = role_id;
-    }
+   // public void setRoleId(Roles roleId) {
+     //   this.roleId = roleId;
+    //}
 
     @Override
     public String toString() {
         return "Users{" +
-                "first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", mobile_no='" + mobile_no + '\'' +
+                ", mobileNo='" + mobileNo + '\'' +
                 ", wallet_money=" + wallet_money +
-                ", role_id=" + role_id +
+               /* ", roleId=" + roleId*/ +
                 '}';
-    }
 
-    public void setRole_id(int i) {
+
+
     }
 }
-
-
